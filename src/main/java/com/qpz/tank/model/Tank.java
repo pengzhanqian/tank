@@ -1,5 +1,6 @@
 package com.qpz.tank.model;
 
+import com.qpz.tank.ResourceMgr;
 import com.qpz.tank.TankFrame;
 import com.qpz.tank.enums.DirEnum;
 
@@ -12,11 +13,11 @@ import java.io.Serializable;
  * @since 2025/5/30 11:08
  **/
 public class Tank implements Serializable {
+    // 子弹的大小
+    public static final int width = ResourceMgr.tankD.getWidth();
+    public static final int height = ResourceMgr.tankD.getHeight();
     @Serial
     private static final long serialVersionUID = -4327244887078026900L;
-    // 子弹的大小
-    private static final int width = 50;
-    private static final int height = 50;
     // 坦克的移动速度
     private static final int speed = 5;
     // 坦克的位置
@@ -36,11 +37,19 @@ public class Tank implements Serializable {
     }
 
     public void paint(Graphics g) {
-        // 画一个矩形表示坦克
-        Color c = g.getColor();
-        g.setColor(Color.WHITE);
-        g.fillRect(x, y, width, height);
-        g.setColor(c);
+//        Color c = g.getColor();
+//        g.setColor(Color.WHITE);
+//        // 画一个矩形表示坦克
+//        g.fillRect(x, y, width, height);
+//        g.setColor(c);
+        // 使用图片替代坦克
+        switch (dir) {
+            case LEFT -> g.drawImage(ResourceMgr.tankL, x, y, null);
+            case RIGHT -> g.drawImage(ResourceMgr.tankR, x, y, null);
+            case UP -> g.drawImage(ResourceMgr.tankU, x, y, null);
+            case DOWN -> g.drawImage(ResourceMgr.tankD, x, y, null);
+        }
+
         // 调用移动方法
         move();
     }
@@ -89,6 +98,8 @@ public class Tank implements Serializable {
     }
 
     public void fire() {
-        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+        int bx = this.x + Tank.width / 2 - Bullet.width / 2;
+        int by = this.y + Tank.height / 2 - Bullet.height / 2;
+        tf.bullets.add(new Bullet(bx, by, this.dir, this.tf));
     }
 }

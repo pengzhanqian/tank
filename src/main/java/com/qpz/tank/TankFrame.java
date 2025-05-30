@@ -17,12 +17,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
  **/
 public class TankFrame extends Frame {
 
+    //    public static final int WIDTH = 2560;
+//    public static final int HEIGHT = 1600;
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     // 初始化子弹
     //public Bullet b = new Bullet(210, 255, DirEnum.DOWN);
     // 批量子弹 使用容器  使用CopyOnWriteArrayList等并发集合  防止多线程下1个线程遍历一个线程删除导致报错  java.util.ConcurrentModificationException
     public List<Bullet> bullets = new CopyOnWriteArrayList<>();
+    // 敌方坦克
+    List<Tank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
     Tank myTank = new Tank(200, 200, DirEnum.DOWN, this);
     Image offScreenImage = null;
@@ -73,6 +77,11 @@ public class TankFrame extends Frame {
             // 防止内存泄露
             for (Bullet bullet : bullets) {
                 bullet.paint(g);
+            }
+        }
+        if (!tanks.isEmpty()) {
+            for (int i = 0; i < tanks.size(); i++) {
+                tanks.get(i).paint(g);
             }
         }
     }
