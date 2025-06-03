@@ -1,6 +1,6 @@
 package com.qpz.tank.test;
 
-import com.qpz.tank.ResourceMgr;
+import com.qpz.tank.single.ResourceMgr;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;

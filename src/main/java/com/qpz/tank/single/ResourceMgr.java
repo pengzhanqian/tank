@@ -1,6 +1,6 @@
-package com.qpz.tank;
+package com.qpz.tank.single;
 
-import com.qpz.tank.util.ImageUtil;
+import com.qpz.tank.single.util.ImageUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

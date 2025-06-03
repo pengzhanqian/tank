@@ -1,4 +1,4 @@
-package com.qpz.tank;
+package com.qpz.tank.single;
 
 import java.awt.*;
 

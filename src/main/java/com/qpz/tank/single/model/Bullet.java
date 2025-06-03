@@ -1,8 +1,8 @@
-package com.qpz.tank.model;
+package com.qpz.tank.single.model;
 
-import com.qpz.tank.*;
-import com.qpz.tank.enums.DirEnum;
-import com.qpz.tank.enums.Group;
+import com.qpz.tank.single.*;
+import com.qpz.tank.single.enums.DirEnum;
+import com.qpz.tank.single.enums.Group;
 
 import java.awt.*;
 import java.io.Serial;

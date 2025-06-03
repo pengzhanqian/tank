@@ -1,9 +1,9 @@
-package com.qpz.tank;
+package com.qpz.tank.single;
 
-import com.qpz.tank.enums.DirEnum;
-import com.qpz.tank.enums.Group;
-import com.qpz.tank.model.Bullet;
-import com.qpz.tank.model.Tank;
+import com.qpz.tank.single.enums.DirEnum;
+import com.qpz.tank.single.enums.Group;
+import com.qpz.tank.single.model.Bullet;
+import com.qpz.tank.single.model.Tank;
 
 import java.awt.*;
 import java.awt.event.*;

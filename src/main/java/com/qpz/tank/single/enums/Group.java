@@ -1,4 +1,4 @@
-package com.qpz.tank.enums;
+package com.qpz.tank.single.enums;
 
 /**
  * @author pengzhan.qian
