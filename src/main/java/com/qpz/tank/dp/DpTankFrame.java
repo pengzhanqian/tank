@@ -1,9 +1,4 @@
-package com.qpz.tank.single;
-
-import com.qpz.tank.single.enums.DirEnum;
-import com.qpz.tank.single.enums.Group;
-import com.qpz.tank.single.model.Bullet;
-import com.qpz.tank.single.model.Tank;
+package com.qpz.tank.dp;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,32 +11,32 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author pengzhan.qian
  * @since 2025/5/29 16:36
  **/
-public class TankFrame extends Frame {
+public class DpTankFrame extends Frame {
 
-    public static final int GAME_WIDTH = PropertyMgr.getIntProperty("gameWidth");
-    public static final int GAME_HEIGHT = PropertyMgr.getIntProperty("gameHeight");
+    public static final int GAME_WIDTH = DpPropertyMgr.getIntProperty("gameWidth");
+    public static final int GAME_HEIGHT = DpPropertyMgr.getIntProperty("gameHeight");
     // 批量子弹 使用容器  使用CopyOnWriteArrayList等并发集合  防止多线程下1个线程遍历一个线程删除导致报错  java.util.ConcurrentModificationException
-    public List<Bullet> bullets = new CopyOnWriteArrayList<>();
+    public List<DpBullet> bullets = new CopyOnWriteArrayList<>();
     // 敌方坦克
-    public List<Tank> tanks = new CopyOnWriteArrayList<>();
+    public List<DpTank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
-    public Tank myTank = new Tank(540 - Tank.TANK_WIDTH, 960 - Tank.TANK_HEIGHT, false, DirEnum.UP, Group.GOOD, this);
+    public DpTank myTank = new DpTank(540 - DpTank.TANK_WIDTH, 960 - DpTank.TANK_HEIGHT, false, DpDirEnum.UP, DpGroup.GOOD, this);
     // 批量爆炸
-    public List<Explode> explodes = new CopyOnWriteArrayList<>();
+    public List<DpExplode> explodes = new CopyOnWriteArrayList<>();
     Image offScreenImage = null;
 
 
-    public TankFrame() throws HeadlessException {
+    public DpTankFrame() throws HeadlessException {
         this.setVisible(true);
         // 单位 像素
         this.setSize(GAME_WIDTH, GAME_HEIGHT);
         this.setResizable(false);
-        this.setTitle("Single Tank War (坦克大战)");
-        System.out.println("Single Tank War Window is init.");
+        this.setTitle("Design Pattern Tank War (坦克大战)");
+        System.out.println("Design Pattern Tank War Window is init.");
         this.addWindowListener(new WindowAdapter() {
             // 关闭窗口
             public void windowClosing(WindowEvent e) {
-                System.out.println("Single Tank War Window is closed");
+                System.out.println("Design Pattern Tank War Window is closed");
                 System.exit(0);
             }
         });
@@ -72,11 +67,12 @@ public class TankFrame extends Frame {
         g.drawString("子弹的数量为" + bullets.size() + ", 主战坦克的坐标: (" + myTank.getX() + ", " + myTank.getY() + " ), 方向:" + myTank.getDir().name(), 10, 60);
         g.drawString("敌方坦克数量: " + tanks.size(), 10, 80);
         g.drawString("爆炸的数量: " + tanks.size(), 10, 100);
+        g.drawString("主战坦克的速度: " + myTank.getSpeed(), 10, 120);
         g.setColor(c);
         myTank.paint(g);
         if (!bullets.isEmpty()) {
             // 防止内存泄露
-            for (Bullet bullet : bullets) {
+            for (DpBullet bullet : bullets) {
                 bullet.paint(g);
             }
         }
@@ -182,10 +178,10 @@ public class TankFrame extends Frame {
                 myTank.setMoving(false);
             } else {
                 myTank.setMoving(true);
-                if (bl) myTank.setDir(DirEnum.LEFT);
-                if (bu) myTank.setDir(DirEnum.UP);
-                if (br) myTank.setDir(DirEnum.RIGHT);
-                if (bd) myTank.setDir(DirEnum.DOWN);
+                if (bl) myTank.setDir(DpDirEnum.LEFT);
+                if (bu) myTank.setDir(DpDirEnum.UP);
+                if (br) myTank.setDir(DpDirEnum.RIGHT);
+                if (bd) myTank.setDir(DpDirEnum.DOWN);
             }
         }
     }
