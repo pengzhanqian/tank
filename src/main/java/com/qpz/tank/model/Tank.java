@@ -99,10 +99,6 @@ public class Tank implements Serializable {
             case RIGHT -> x += speed;
             case DOWN -> y += speed;
         }
-        //update rect
-        rect.x = this.x;
-        rect.y = this.y;
-        
         // 增加了随机开火
         // 增加主坦克不参与随机  敌方坦克 5% 随机开火
         if (this.group == Group.BAD && random.nextInt(100) > 95) {
@@ -113,6 +109,9 @@ public class Tank implements Serializable {
             randomDir();
         }
         boundsCheck();
+        //update rect
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     private void boundsCheck() {

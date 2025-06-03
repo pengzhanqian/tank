@@ -74,13 +74,13 @@ public class Bullet implements Serializable {
             case DOWN -> y += speed;
         }
 
-        //update rect
-        rect.x = this.x;
-        rect.y = this.y;
-
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
+
+        //update rect
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     /**
