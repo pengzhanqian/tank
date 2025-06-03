@@ -10,7 +10,7 @@ public class Main {
         //初始化敌方坦克
         int initTankCount = PropertyMgr.getIntProperty("initTankCount");
         for (int i = 0; i < initTankCount; i++) {
-            tf.tanks.add(new Tank(50 + i * 80, 200, DirEnum.DOWN, Group.BAD, tf));
+            tf.tanks.add(new Tank(50 + i * 80, 200, true, DirEnum.DOWN, Group.BAD, tf));
         }
 
         // 音效

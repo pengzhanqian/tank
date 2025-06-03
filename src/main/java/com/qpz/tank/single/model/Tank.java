@@ -1,5 +1,6 @@
 package com.qpz.tank.single.model;
 
+import com.qpz.tank.dp.DpResourceMgr;
 import com.qpz.tank.single.*;
 import com.qpz.tank.single.enums.DirEnum;
 import com.qpz.tank.single.enums.Group;
@@ -10,7 +11,7 @@ import java.io.Serializable;
 import java.util.Random;
 
 /**
- * @author pengzhan.qian
+ * @author pengzhan.qian=
  * @since 2025/5/30 11:08
  **/
 public class Tank implements Serializable {
@@ -29,15 +30,16 @@ public class Tank implements Serializable {
     private DirEnum dir;
     private TankFrame tf;
     // 坦克是否移动
-    private boolean moving = true;
+    private boolean moving;
     // 坦克灭亡  默认存活
     private boolean living = true;
     private Group group;
     private Random random = new Random();
 
-    public Tank(int x, int y, DirEnum dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, boolean moving, DirEnum dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
+        this.moving = moving;
         this.dir = dir;
         this.tf = tf;
         this.group = group;
@@ -53,34 +55,36 @@ public class Tank implements Serializable {
         if (!living) {
             tf.tanks.remove(this);
         }
+        // 每大于2秒 刷新一下坦克
+        boolean evenFlag = System.currentTimeMillis() / 1000 % 2 == 0;
         // 使用图片替代坦克
         switch (dir) {
             case LEFT -> {
                 if (this.group == Group.GOOD) {
-                    g.drawImage(ResourceMgr.goodTankL, x, y, null);
+                    g.drawImage(evenFlag ? DpResourceMgr.goodTankL1 : DpResourceMgr.goodTankL2, x, y, null);
                 } else if (this.group == Group.BAD) {
-                    g.drawImage(ResourceMgr.badTankL, x, y, null);
+                    g.drawImage(evenFlag ? DpResourceMgr.badTankL1 : DpResourceMgr.badTankL2, x, y, null);
                 }
             }
             case RIGHT -> {
                 if (this.group == Group.GOOD) {
-                    g.drawImage(ResourceMgr.goodTankR, x, y, null);
+                    g.drawImage(evenFlag ? DpResourceMgr.goodTankR1 : DpResourceMgr.goodTankR2, x, y, null);
                 } else if (this.group == Group.BAD) {
-                    g.drawImage(ResourceMgr.badTankR, x, y, null);
+                    g.drawImage(evenFlag ? DpResourceMgr.badTankR1 : DpResourceMgr.badTankR2, x, y, null);
                 }
             }
             case UP -> {
                 if (this.group == Group.GOOD) {
-                    g.drawImage(ResourceMgr.goodTankU, x, y, null);
+                    g.drawImage(evenFlag ? DpResourceMgr.goodTankU1 : DpResourceMgr.goodTankU2, x, y, null);
                 } else if (this.group == Group.BAD) {
-                    g.drawImage(ResourceMgr.badTankU, x, y, null);
+                    g.drawImage(evenFlag ? DpResourceMgr.badTankU1 : DpResourceMgr.badTankU2, x, y, null);
                 }
             }
             case DOWN -> {
                 if (this.group == Group.GOOD) {
-                    g.drawImage(ResourceMgr.goodTankD, x, y, null);
+                    g.drawImage(evenFlag ? DpResourceMgr.goodTankD1 : DpResourceMgr.goodTankD2, x, y, null);
                 } else if (this.group == Group.BAD) {
-                    g.drawImage(ResourceMgr.badTankD, x, y, null);
+                    g.drawImage(evenFlag ? DpResourceMgr.badTankD1 : DpResourceMgr.badTankD2, x, y, null);
                 }
             }
         }
