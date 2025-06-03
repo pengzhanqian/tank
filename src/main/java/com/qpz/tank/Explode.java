@@ -14,7 +14,6 @@ public class Explode {
     private int x;
     private int y;
     private TankFrame tf = null;
-    private boolean living = true;
 
     // 爆炸图片的进度
     private int step = 0;
@@ -28,18 +27,8 @@ public class Explode {
     }
 
     public void paint(Graphics g) {
-        if (!living) {
-            return;
-        }
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
-        if (step >= ResourceMgr.explodes.length) {
-            step = 0;
-            living = false;
-        }
-    }
-
-    public void die() {
-        this.living = false;
+        if (step >= ResourceMgr.explodes.length) tf.explodes.remove(this);
     }
 
     public int getX() {
@@ -65,14 +54,6 @@ public class Explode {
 
     public void setTf(TankFrame tf) {
         this.tf = tf;
-    }
-
-    public boolean isLiving() {
-        return living;
-    }
-
-    public void setLiving(boolean living) {
-        this.living = living;
     }
 
 }

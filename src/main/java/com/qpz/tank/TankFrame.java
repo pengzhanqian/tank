@@ -30,7 +30,8 @@ public class TankFrame extends Frame {
     public List<Tank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
     public Tank myTank = new Tank(200, 200, DirEnum.DOWN, Group.GOOD, this);
-    public Explode e = new Explode(100, 100, this);
+    // 批量爆炸
+    public List<Explode> explodes = new CopyOnWriteArrayList<>();
     Image offScreenImage = null;
 
 
@@ -74,6 +75,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量为" + bullets.size() + ", 主战坦克的坐标: (" + myTank.getX() + ", " + myTank.getY() + " ), 方向:" + myTank.getDir().name(), 10, 60);
         g.drawString("敌方坦克数量: " + tanks.size(), 10, 80);
+        g.drawString("集中爆炸的数量: " + tanks.size(), 10, 100);
         g.setColor(c);
         myTank.paint(g);
         if (!bullets.isEmpty()) {
@@ -87,7 +89,11 @@ public class TankFrame extends Frame {
                 tanks.get(i).paint(g);
             }
         }
-
+        if (!explodes.isEmpty()) {
+            for (int i = 0; i < explodes.size(); i++) {
+                explodes.get(i).paint(g);
+            }
+        }
         if (!bullets.isEmpty() && !tanks.isEmpty()) {
             for (int i = 0; i < bullets.size(); i++) {
                 for (int j = 0; j < tanks.size(); j++) {
@@ -95,7 +101,7 @@ public class TankFrame extends Frame {
                 }
             }
         }
-        e.paint(g);
+
     }
 
 

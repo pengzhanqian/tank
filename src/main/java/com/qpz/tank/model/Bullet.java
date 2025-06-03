@@ -1,7 +1,6 @@
 package com.qpz.tank.model;
 
-import com.qpz.tank.ResourceMgr;
-import com.qpz.tank.TankFrame;
+import com.qpz.tank.*;
 import com.qpz.tank.enums.DirEnum;
 import com.qpz.tank.enums.Group;
 
@@ -18,8 +17,8 @@ import java.io.Serializable;
 public class Bullet implements Serializable {
 
     // 子弹的大小
-    public static final int width = ResourceMgr.bulletD.getWidth();
-    public static final int height = ResourceMgr.bulletD.getHeight();
+    public static final int BULLET_WIDTH = ResourceMgr.bulletD.getWidth();
+    public static final int BULLET_HEIGHT = ResourceMgr.bulletD.getHeight();
     @Serial
     private static final long serialVersionUID = -9091245601031262535L;
     // 子弹的移动速度
@@ -93,11 +92,12 @@ public class Bullet implements Serializable {
         if (this.group == tank.getGroup()) return;
 
         // TODO Rectangle 对象每次检测都new1个太多了  作为坦克或者子弹的属性去处理
-        Rectangle rectangle = new Rectangle(this.x, this.y, Bullet.width, Bullet.height);
-        Rectangle tankRectangle = new Rectangle(tank.getX(), tank.getY(), Tank.width, Tank.height);
+        Rectangle rectangle = new Rectangle(this.x, this.y, Bullet.BULLET_WIDTH, Bullet.BULLET_HEIGHT);
+        Rectangle tankRectangle = new Rectangle(tank.getX(), tank.getY(), Tank.TANK_WIDTH, Tank.TANK_HEIGHT);
         if (rectangle.intersects(tankRectangle)) {
             tank.die();
             this.die();
+            tf.explodes.add(new Explode(x, y, tf));
         }
     }
 

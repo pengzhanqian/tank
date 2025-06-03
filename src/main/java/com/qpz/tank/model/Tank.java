@@ -15,8 +15,8 @@ import java.util.Random;
  **/
 public class Tank implements Serializable {
     // 子弹的大小
-    public static final int width = ResourceMgr.tankU.getWidth();
-    public static final int height = ResourceMgr.tankU.getHeight();
+    public static final int TANK_WIDTH = ResourceMgr.tankU.getWidth();
+    public static final int TANK_HEIGHT = ResourceMgr.tankU.getHeight();
     @Serial
     private static final long serialVersionUID = -4327244887078026900L;
     // 坦克的移动速度
@@ -73,7 +73,7 @@ public class Tank implements Serializable {
             case RIGHT -> x += speed;
             case DOWN -> y += speed;
         }
-        
+
         // 增加了随机开火
         if (random.nextInt(10) > 8) {
             this.fire();
@@ -82,8 +82,8 @@ public class Tank implements Serializable {
 
 
     public void fire() {
-        int bx = this.x + Tank.width / 2 - Bullet.width / 2;
-        int by = this.y + Tank.height / 2 - Bullet.height / 2;
+        int bx = this.x + Tank.TANK_WIDTH / 2 - Bullet.BULLET_WIDTH / 2;
+        int by = this.y + Tank.TANK_HEIGHT / 2 - Bullet.BULLET_HEIGHT / 2;
         tf.bullets.add(new Bullet(bx, by, this.dir, this.group, this.tf));
         // 增加坦克开火音效
         if (this.group == Group.GOOD) new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
