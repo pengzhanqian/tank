@@ -20,8 +20,8 @@ public class TankFrame extends Frame {
 
     //    public static final int WIDTH = 2560;
 //    public static final int HEIGHT = 1600;
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 600;
+    public static final int GAME_WIDTH = 1080;
+    public static final int GAME_HEIGHT = 960;
     // 初始化子弹
     //public Bullet b = new Bullet(210, 255, DirEnum.DOWN);
     // 批量子弹 使用容器  使用CopyOnWriteArrayList等并发集合  防止多线程下1个线程遍历一个线程删除导致报错  java.util.ConcurrentModificationException
@@ -37,7 +37,7 @@ public class TankFrame extends Frame {
     public TankFrame() throws HeadlessException {
         this.setVisible(true);
         // 单位 像素
-        this.setSize(WIDTH, HEIGHT);
+        this.setSize(GAME_WIDTH, GAME_HEIGHT);
         this.setResizable(false);
         this.setTitle("Tank War (坦克大战)");
         System.out.println("Tank War Window is init.");
@@ -138,6 +138,9 @@ public class TankFrame extends Frame {
 
             // 键按下去改变主战坦克方向
             setMainTankDir();
+
+            // 键按下去会出现坦克移动音效
+            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
         }
 
         @Override

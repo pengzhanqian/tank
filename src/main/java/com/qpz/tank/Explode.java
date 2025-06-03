@@ -8,8 +8,8 @@ import java.awt.*;
  **/
 public class Explode {
 
-    public static final int width = ResourceMgr.explodes[0].getWidth();
-    public static final int height = ResourceMgr.explodes[0].getHeight();
+    public static final int EXPLODE_WIDTH = ResourceMgr.explodes[0].getWidth();
+    public static final int EXPLODE_HEIGHT = ResourceMgr.explodes[0].getHeight();
     // 爆炸图片的位置
     private int x;
     private int y;
@@ -23,6 +23,8 @@ public class Explode {
         this.x = x;
         this.y = y;
         this.tf = tf;
+        // 爆炸音效
+        new Thread(() -> new Audio("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {

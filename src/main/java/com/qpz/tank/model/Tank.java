@@ -1,7 +1,6 @@
 package com.qpz.tank.model;
 
-import com.qpz.tank.ResourceMgr;
-import com.qpz.tank.TankFrame;
+import com.qpz.tank.*;
 import com.qpz.tank.enums.DirEnum;
 import com.qpz.tank.enums.Group;
 
@@ -16,12 +15,12 @@ import java.util.Random;
  **/
 public class Tank implements Serializable {
     // 子弹的大小
-    public static final int width = ResourceMgr.tankD.getWidth();
-    public static final int height = ResourceMgr.tankD.getHeight();
+    public static final int width = ResourceMgr.tankU.getWidth();
+    public static final int height = ResourceMgr.tankU.getHeight();
     @Serial
     private static final long serialVersionUID = -4327244887078026900L;
     // 坦克的移动速度
-    private static final int speed = 5;
+    private static final int speed = 2;
     // 坦克的位置
     private int x;
     private int y;
@@ -74,7 +73,8 @@ public class Tank implements Serializable {
             case RIGHT -> x += speed;
             case DOWN -> y += speed;
         }
-
+        
+        // 增加了随机开火
         if (random.nextInt(10) > 8) {
             this.fire();
         }
@@ -85,6 +85,8 @@ public class Tank implements Serializable {
         int bx = this.x + Tank.width / 2 - Bullet.width / 2;
         int by = this.y + Tank.height / 2 - Bullet.height / 2;
         tf.bullets.add(new Bullet(bx, by, this.dir, this.group, this.tf));
+        // 增加坦克开火音效
+        if (this.group == Group.GOOD) new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
     }
 
     public void die() {
