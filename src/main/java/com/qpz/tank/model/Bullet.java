@@ -22,7 +22,7 @@ public class Bullet implements Serializable {
     @Serial
     private static final long serialVersionUID = -9091245601031262535L;
     // 子弹的移动速度
-    private static final int speed = 6;
+    private static final int speed = PropertyMgr.getIntProperty("bulletSpeed");
     Rectangle rect = new Rectangle();
     // 子弹的位置
     private int x;

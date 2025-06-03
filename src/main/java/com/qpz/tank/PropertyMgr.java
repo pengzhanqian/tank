@@ -20,15 +20,20 @@ public class PropertyMgr {
         }
     }
 
-    public static Object getProperty(String key) {
+    public static String getProperty(String key) {
         if (props == null) return null;
         return props.getProperty(key);
     }
 
+    public static Integer getIntProperty(String key) {
+        if (props == null) return 0;
+        return Integer.parseInt(props.getProperty(key));
+    }
+
     public static void main(String[] args) {
-        Object initTankCount = getProperty("initTankCount");
+        String initTankCount = getProperty("initTankCount");
         assert initTankCount != null;
-        System.out.println(Integer.parseInt((String) initTankCount));
+        System.out.println(Integer.parseInt(initTankCount));
     }
 
 }

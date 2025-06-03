@@ -20,7 +20,7 @@ public class Tank implements Serializable {
     @Serial
     private static final long serialVersionUID = -4327244887078026900L;
     // 坦克的移动速度
-    private static final int speed = 2;
+    private static final int speed = PropertyMgr.getIntProperty("tankSpeed");
     Rectangle rect = new Rectangle();
     // 坦克的位置
     private int x;

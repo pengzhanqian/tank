@@ -18,8 +18,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
  **/
 public class TankFrame extends Frame {
 
-    public static final int GAME_WIDTH = 1080;
-    public static final int GAME_HEIGHT = 960;
+    public static final int GAME_WIDTH = PropertyMgr.getIntProperty("gameWidth");
+    public static final int GAME_HEIGHT = PropertyMgr.getIntProperty("gameHeight");
     // 批量子弹 使用容器  使用CopyOnWriteArrayList等并发集合  防止多线程下1个线程遍历一个线程删除导致报错  java.util.ConcurrentModificationException
     public List<Bullet> bullets = new CopyOnWriteArrayList<>();
     // 敌方坦克
