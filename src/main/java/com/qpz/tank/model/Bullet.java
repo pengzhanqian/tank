@@ -68,8 +68,8 @@ public class Bullet implements Serializable {
             case RIGHT -> x += speed;
             case DOWN -> y += speed;
         }
-
-        if (x < 0 || y < 0 || x > TankFrame.WIDTH || y > TankFrame.HEIGHT) {
+        
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
     }
