@@ -22,14 +22,12 @@ public class TankFrame extends Frame {
 //    public static final int HEIGHT = 1600;
     public static final int GAME_WIDTH = 1080;
     public static final int GAME_HEIGHT = 960;
-    // 初始化子弹
-    //public Bullet b = new Bullet(210, 255, DirEnum.DOWN);
     // 批量子弹 使用容器  使用CopyOnWriteArrayList等并发集合  防止多线程下1个线程遍历一个线程删除导致报错  java.util.ConcurrentModificationException
     public List<Bullet> bullets = new CopyOnWriteArrayList<>();
     // 敌方坦克
     public List<Tank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
-    public Tank myTank = new Tank(200, 200, DirEnum.DOWN, Group.GOOD, this);
+    public Tank myTank = new Tank(200, 400, DirEnum.DOWN, Group.GOOD, this);
     // 批量爆炸
     public List<Explode> explodes = new CopyOnWriteArrayList<>();
     Image offScreenImage = null;
@@ -58,12 +56,12 @@ public class TankFrame extends Frame {
     @Override
     public void update(Graphics g) {
         if (offScreenImage == null) {
-            offScreenImage = this.createImage(WIDTH, HEIGHT);
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
         Color c = gOffScreen.getColor();
         gOffScreen.setColor(Color.BLACK);
-        gOffScreen.fillRect(0, 0, WIDTH, HEIGHT);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
         gOffScreen.setColor(c);
         paint(gOffScreen);
         g.drawImage(offScreenImage, 0, 0, null);
@@ -75,7 +73,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量为" + bullets.size() + ", 主战坦克的坐标: (" + myTank.getX() + ", " + myTank.getY() + " ), 方向:" + myTank.getDir().name(), 10, 60);
         g.drawString("敌方坦克数量: " + tanks.size(), 10, 80);
-        g.drawString("集中爆炸的数量: " + tanks.size(), 10, 100);
+        g.drawString("爆炸的数量: " + tanks.size(), 10, 100);
         g.setColor(c);
         myTank.paint(g);
         if (!bullets.isEmpty()) {
@@ -146,7 +144,7 @@ public class TankFrame extends Frame {
             setMainTankDir();
 
             // 键按下去会出现坦克移动音效
-            new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
+            //new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
         }
 
         @Override

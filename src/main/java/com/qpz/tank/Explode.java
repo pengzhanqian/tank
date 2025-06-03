@@ -13,7 +13,7 @@ public class Explode {
     // 爆炸图片的位置
     private int x;
     private int y;
-    private TankFrame tf = null;
+    private TankFrame tf;
 
     // 爆炸图片的进度
     private int step = 0;
@@ -28,7 +28,10 @@ public class Explode {
 
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
-        if (step >= ResourceMgr.explodes.length) tf.explodes.remove(this);
+        if (step >= ResourceMgr.explodes.length) {
+            step = 0;
+            tf.explodes.remove(this);
+        }
     }
 
     public int getX() {

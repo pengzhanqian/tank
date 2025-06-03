@@ -32,7 +32,7 @@ public class Bullet implements Serializable {
     private boolean living = true;
     // 持有坦克框的引用
     private TankFrame tf;
-    private Group group = Group.BAD;
+    private Group group;
 
     public Bullet(int x, int y, DirEnum dir, Group group, TankFrame tf) {
         this.x = x;
@@ -46,13 +46,6 @@ public class Bullet implements Serializable {
         if (!living) {
             tf.bullets.remove(this);
         }
-//        Color c = g.getColor();
-//        // 红色子弹
-//        g.setColor(Color.RED);
-//        // 画一个圆形表示子弹
-//        g.fillOval(x + 20, y + 20, width, height);
-//        g.setColor(c);
-
         // 使用图片替代子弹
         switch (dir) {
             case LEFT -> g.drawImage(ResourceMgr.bulletL, x, y, null);

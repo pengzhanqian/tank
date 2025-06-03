@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -19,7 +20,7 @@ public class ImageRotateTest {
     @Test
     public void test() {
         try {
-            BufferedImage tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
+            BufferedImage tankL = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif")));
             tankL = rotateImage(tankL, 90);
             assertNotNull(tankL);
         } catch (IOException e) {

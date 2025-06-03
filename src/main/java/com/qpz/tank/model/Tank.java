@@ -28,10 +28,10 @@ public class Tank implements Serializable {
     private DirEnum dir;
     private TankFrame tf = null;
     // 坦克是否移动
-    private boolean moving = false;
+    private boolean moving = true;
     // 坦克灭亡  默认存活
     private boolean living = true;
-    private Group group = Group.BAD;
+    private Group group;
     private Random random = new Random();
 
     public Tank(int x, int y, DirEnum dir, Group group, TankFrame tf) {
@@ -43,11 +43,6 @@ public class Tank implements Serializable {
     }
 
     public void paint(Graphics g) {
-//        Color c = g.getColor();
-//        g.setColor(Color.WHITE);
-//        // 画一个矩形表示坦克
-//        g.fillRect(x, y, width, height);
-//        g.setColor(c);
         if (!living) {
             tf.tanks.remove(this);
         }
@@ -73,7 +68,7 @@ public class Tank implements Serializable {
             case RIGHT -> x += speed;
             case DOWN -> y += speed;
         }
-
+        System.out.println("moving. x = " + x + ", y = " + y);
         // 增加了随机开火
         // 增加主坦克不参与随机  敌方坦克 5% 随机开火
         if (this.group == Group.BAD && random.nextInt(100) > 95) {
@@ -86,12 +81,14 @@ public class Tank implements Serializable {
         int bx = this.x + Tank.TANK_WIDTH / 2 - Bullet.BULLET_WIDTH / 2;
         int by = this.y + Tank.TANK_HEIGHT / 2 - Bullet.BULLET_HEIGHT / 2;
         tf.bullets.add(new Bullet(bx, by, this.dir, this.group, this.tf));
+        System.out.println("firing");
         // 增加坦克开火音效
         if (this.group == Group.GOOD) new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
     }
 
     public void die() {
         this.living = false;
+        System.out.println("die");
     }
 
     public int getX() {
@@ -148,13 +145,5 @@ public class Tank implements Serializable {
 
     public void setGroup(Group group) {
         this.group = group;
-    }
-
-    public Random getRandom() {
-        return random;
-    }
-
-    public void setRandom(Random random) {
-        this.random = random;
     }
 }
