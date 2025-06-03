@@ -3,6 +3,7 @@ package com.qpz.tank.model;
 import com.qpz.tank.ResourceMgr;
 import com.qpz.tank.TankFrame;
 import com.qpz.tank.enums.DirEnum;
+import com.qpz.tank.enums.Group;
 
 import java.awt.*;
 import java.io.Serial;
@@ -29,11 +30,12 @@ public class Bullet implements Serializable {
     // 子弹的方向
     private DirEnum dir;
     // 子弹是否存活
-    private boolean live = true;
+    private boolean living = true;
     // 持有坦克框的引用
     private TankFrame tf;
+    private Group group = Group.BAD;
 
-    public Bullet(int x, int y, DirEnum dir, TankFrame tf) {
+    public Bullet(int x, int y, DirEnum dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -41,7 +43,7 @@ public class Bullet implements Serializable {
     }
 
     public void paint(Graphics g) {
-        if (!live) {
+        if (!living) {
             tf.bullets.remove(this);
         }
 //        Color c = g.getColor();
@@ -63,6 +65,9 @@ public class Bullet implements Serializable {
     }
 
     public void move() {
+        if (!living) {
+            return;
+        }
         // 每次paint都改变1次方向  封装成移动方法
         switch (dir) {
             case LEFT -> x -= speed;
@@ -72,7 +77,26 @@ public class Bullet implements Serializable {
         }
 
         if (x < 0 || y < 0 || x > TankFrame.WIDTH || y > TankFrame.HEIGHT) {
-            live = false;
+            living = false;
         }
+    }
+
+    /**
+     * 简单实现的碰撞检测
+     * 本身是子弹
+     *
+     * @param tank 坦克
+     */
+    public void collideWith(Tank tank) {
+        Rectangle rectangle = new Rectangle(this.x, this.y, Bullet.width, Bullet.height);
+        Rectangle tankRectangle = new Rectangle(tank.getX(), tank.getY(), Tank.width, Tank.height);
+        if (rectangle.intersects(tankRectangle)) {
+            tank.die();
+            this.die();
+        }
+    }
+
+    private void die() {
+        this.living = false;
     }
 }

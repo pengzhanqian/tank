@@ -7,6 +7,7 @@ import com.qpz.tank.enums.DirEnum;
 import java.awt.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * @author pengzhan.qian
@@ -28,6 +29,10 @@ public class Tank implements Serializable {
     private TankFrame tf = null;
     // 坦克是否移动
     private boolean moving = false;
+    // 坦克灭亡  默认存活
+    private boolean living = true;
+
+    private Random random = new Random();
 
     public Tank(int x, int y, DirEnum dir, TankFrame tf) {
         this.x = x;
@@ -42,6 +47,9 @@ public class Tank implements Serializable {
 //        // 画一个矩形表示坦克
 //        g.fillRect(x, y, width, height);
 //        g.setColor(c);
+        if (!living) {
+            tf.tanks.remove(this);
+        }
         // 使用图片替代坦克
         switch (dir) {
             case LEFT -> g.drawImage(ResourceMgr.tankL, x, y, null);
@@ -55,6 +63,7 @@ public class Tank implements Serializable {
     }
 
     public void move() {
+        if (!this.living) return;
         if (!this.moving) return;
         // 每次paint都改变1次方向  封装成移动方法
         switch (dir) {
@@ -63,6 +72,21 @@ public class Tank implements Serializable {
             case RIGHT -> x += speed;
             case DOWN -> y += speed;
         }
+
+        if (random.nextInt(10) > 8) {
+            this.fire();
+        }
+    }
+
+
+    public void fire() {
+        int bx = this.x + Tank.width / 2 - Bullet.width / 2;
+        int by = this.y + Tank.height / 2 - Bullet.height / 2;
+        tf.bullets.add(new Bullet(bx, by, this.dir, this.tf));
+    }
+
+    public void die() {
+        this.living = false;
     }
 
     public int getX() {
@@ -95,11 +119,5 @@ public class Tank implements Serializable {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
-    }
-
-    public void fire() {
-        int bx = this.x + Tank.width / 2 - Bullet.width / 2;
-        int by = this.y + Tank.height / 2 - Bullet.height / 2;
-        tf.bullets.add(new Bullet(bx, by, this.dir, this.tf));
     }
 }

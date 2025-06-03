@@ -26,7 +26,7 @@ public class TankFrame extends Frame {
     // 批量子弹 使用容器  使用CopyOnWriteArrayList等并发集合  防止多线程下1个线程遍历一个线程删除导致报错  java.util.ConcurrentModificationException
     public List<Bullet> bullets = new CopyOnWriteArrayList<>();
     // 敌方坦克
-    List<Tank> tanks = new CopyOnWriteArrayList<>();
+    public List<Tank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
     Tank myTank = new Tank(200, 200, DirEnum.DOWN, this);
     Image offScreenImage = null;
@@ -70,7 +70,8 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("子弹的数量为" + bullets.size() + ", 坦克的坐标: (" + myTank.getX() + ", " + myTank.getY() + "), 方向: " + myTank.getDir().name(), 10, 60);
+        g.drawString("子弹的数量为" + bullets.size() + ", 主战坦克的坐标: (" + myTank.getX() + ", " + myTank.getY() + " ), 方向:" + myTank.getDir().name(), 10, 60);
+        g.drawString("敌方坦克数量: " + tanks.size(), 10, 80);
         g.setColor(c);
         myTank.paint(g);
         if (!bullets.isEmpty()) {
@@ -82,6 +83,14 @@ public class TankFrame extends Frame {
         if (!tanks.isEmpty()) {
             for (int i = 0; i < tanks.size(); i++) {
                 tanks.get(i).paint(g);
+            }
+        }
+
+        if (!bullets.isEmpty() && !tanks.isEmpty()) {
+            for (int i = 0; i < bullets.size(); i++) {
+                for (int j = 0; j < tanks.size(); j++) {
+                    bullets.get(i).collideWith(tanks.get(j));
+                }
             }
         }
     }
