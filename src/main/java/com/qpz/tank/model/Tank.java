@@ -75,7 +75,8 @@ public class Tank implements Serializable {
         }
 
         // 增加了随机开火
-        if (random.nextInt(10) > 8) {
+        // 增加主坦克不参与随机  敌方坦克 5% 随机开火
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
     }
