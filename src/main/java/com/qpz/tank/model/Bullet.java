@@ -89,6 +89,10 @@ public class Bullet implements Serializable {
      * @param tank 坦克
      */
     public void collideWith(Tank tank) {
+        // 分组相同 则不用检测
+        if (this.group == tank.getGroup()) return;
+
+        // TODO Rectangle 对象每次检测都new1个太多了  作为坦克或者子弹的属性去处理
         Rectangle rectangle = new Rectangle(this.x, this.y, Bullet.width, Bullet.height);
         Rectangle tankRectangle = new Rectangle(tank.getX(), tank.getY(), Tank.width, Tank.height);
         if (rectangle.intersects(tankRectangle)) {
