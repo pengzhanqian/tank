@@ -21,6 +21,7 @@ public class Tank implements Serializable {
     private static final long serialVersionUID = -4327244887078026900L;
     // 坦克的移动速度
     private static final int speed = 2;
+    Rectangle rect = new Rectangle();
     // 坦克的位置
     private int x;
     private int y;
@@ -40,6 +41,12 @@ public class Tank implements Serializable {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = TANK_WIDTH;
+        rect.height = TANK_HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -92,6 +99,10 @@ public class Tank implements Serializable {
             case RIGHT -> x += speed;
             case DOWN -> y += speed;
         }
+        //update rect
+        rect.x = this.x;
+        rect.y = this.y;
+        
         // 增加了随机开火
         // 增加主坦克不参与随机  敌方坦克 5% 随机开火
         if (this.group == Group.BAD && random.nextInt(100) > 95) {

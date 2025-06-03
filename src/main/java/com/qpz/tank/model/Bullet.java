@@ -23,6 +23,7 @@ public class Bullet implements Serializable {
     private static final long serialVersionUID = -9091245601031262535L;
     // 子弹的移动速度
     private static final int speed = 6;
+    Rectangle rect = new Rectangle();
     // 子弹的位置
     private int x;
     private int y;
@@ -40,6 +41,10 @@ public class Bullet implements Serializable {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = BULLET_WIDTH;
+        rect.height = BULLET_HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -69,6 +74,10 @@ public class Bullet implements Serializable {
             case DOWN -> y += speed;
         }
 
+        //update rect
+        rect.x = this.x;
+        rect.y = this.y;
+
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
@@ -83,11 +92,7 @@ public class Bullet implements Serializable {
     public void collideWith(Tank tank) {
         // 分组相同 则不用检测
         if (this.group == tank.getGroup()) return;
-
-        // TODO Rectangle 对象每次检测都new1个太多了  作为坦克或者子弹的属性去处理
-        Rectangle rectangle = new Rectangle(this.x, this.y, Bullet.BULLET_WIDTH, Bullet.BULLET_HEIGHT);
-        Rectangle tankRectangle = new Rectangle(tank.getX(), tank.getY(), Tank.TANK_WIDTH, Tank.TANK_HEIGHT);
-        if (rectangle.intersects(tankRectangle)) {
+        if (this.rect.intersects(tank.rect)) {
             tank.die();
             this.die();
             int ex = tank.getX() + Tank.TANK_WIDTH / 2 - Explode.EXPLODE_WIDTH / 2;
