@@ -167,7 +167,7 @@ public class TankFrame extends Frame {
                     bd = false;
                     //y += 10;
                     break;
-                case KeyEvent.VK_SPACE:
+                case KeyEvent.VK_CONTROL:
                     // 坦克发出一颗子弹
                     myTank.fire();
                     break;
