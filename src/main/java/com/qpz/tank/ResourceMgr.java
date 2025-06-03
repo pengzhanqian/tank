@@ -14,10 +14,15 @@ import java.util.Objects;
  * @since 2025/5/30 22:01
  **/
 public class ResourceMgr {
-    public static BufferedImage tankL;
-    public static BufferedImage tankU;
-    public static BufferedImage tankR;
-    public static BufferedImage tankD;
+    public static BufferedImage goodTankL;
+    public static BufferedImage goodTankU;
+    public static BufferedImage goodTankR;
+    public static BufferedImage goodTankD;
+
+    public static BufferedImage badTankL;
+    public static BufferedImage badTankU;
+    public static BufferedImage badTankR;
+    public static BufferedImage badTankD;
 
     public static BufferedImage bulletL;
     public static BufferedImage bulletU;
@@ -32,10 +37,20 @@ public class ResourceMgr {
 //            tankU = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif")));
 //            tankR = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif")));
 //            tankD = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif")));
-            tankU = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png")));
-            tankL = ImageUtil.rotateImage(tankU, -90);
-            tankR = ImageUtil.rotateImage(tankU, 90);
-            tankD = ImageUtil.rotateImage(tankU, 180);
+//            tankU = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png")));
+//            tankL = ImageUtil.rotateImage(tankU, -90);
+//            tankR = ImageUtil.rotateImage(tankU, 90);
+//            tankD = ImageUtil.rotateImage(tankU, 180);
+
+            goodTankU = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png")));
+            goodTankL = ImageUtil.rotateImage(goodTankU, -90);
+            goodTankR = ImageUtil.rotateImage(goodTankU, 90);
+            goodTankD = ImageUtil.rotateImage(goodTankU, 180);
+
+            badTankU = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png")));
+            badTankL = ImageUtil.rotateImage(badTankU, -90);
+            badTankR = ImageUtil.rotateImage(badTankU, 90);
+            badTankD = ImageUtil.rotateImage(badTankU, 180);
 
 //            bulletL = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif")));
 //            bulletU = ImageIO.read(Objects.requireNonNull(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif")));

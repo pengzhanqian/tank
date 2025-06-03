@@ -14,9 +14,9 @@ import java.util.Random;
  * @since 2025/5/30 11:08
  **/
 public class Tank implements Serializable {
-    // 子弹的大小
-    public static final int TANK_WIDTH = ResourceMgr.tankU.getWidth();
-    public static final int TANK_HEIGHT = ResourceMgr.tankU.getHeight();
+    // 坦克的大小
+    public static final int TANK_WIDTH = ResourceMgr.goodTankU.getWidth();
+    public static final int TANK_HEIGHT = ResourceMgr.goodTankU.getHeight();
     @Serial
     private static final long serialVersionUID = -4327244887078026900L;
     // 坦克的移动速度
@@ -48,10 +48,34 @@ public class Tank implements Serializable {
         }
         // 使用图片替代坦克
         switch (dir) {
-            case LEFT -> g.drawImage(ResourceMgr.tankL, x, y, null);
-            case RIGHT -> g.drawImage(ResourceMgr.tankR, x, y, null);
-            case UP -> g.drawImage(ResourceMgr.tankU, x, y, null);
-            case DOWN -> g.drawImage(ResourceMgr.tankD, x, y, null);
+            case LEFT -> {
+                if (this.group == Group.GOOD) {
+                    g.drawImage(ResourceMgr.goodTankL, x, y, null);
+                } else if (this.group == Group.BAD) {
+                    g.drawImage(ResourceMgr.badTankL, x, y, null);
+                }
+            }
+            case RIGHT -> {
+                if (this.group == Group.GOOD) {
+                    g.drawImage(ResourceMgr.goodTankR, x, y, null);
+                } else if (this.group == Group.BAD) {
+                    g.drawImage(ResourceMgr.badTankR, x, y, null);
+                }
+            }
+            case UP -> {
+                if (this.group == Group.GOOD) {
+                    g.drawImage(ResourceMgr.goodTankU, x, y, null);
+                } else if (this.group == Group.BAD) {
+                    g.drawImage(ResourceMgr.badTankU, x, y, null);
+                }
+            }
+            case DOWN -> {
+                if (this.group == Group.GOOD) {
+                    g.drawImage(ResourceMgr.goodTankD, x, y, null);
+                } else if (this.group == Group.BAD) {
+                    g.drawImage(ResourceMgr.badTankD, x, y, null);
+                }
+            }
         }
 
         // 调用移动方法
