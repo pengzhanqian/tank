@@ -73,8 +73,8 @@ public class Tank implements Serializable {
         if (this.group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
-        // 增加敌方坦克移动的时候随机方向
-        if (this.group == Group.BAD) {
+        // 增加敌方坦克移动的时候随机方向  并且增加概率变方向
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
             randomDir();
         }
     }

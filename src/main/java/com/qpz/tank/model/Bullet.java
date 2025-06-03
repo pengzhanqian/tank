@@ -68,7 +68,7 @@ public class Bullet implements Serializable {
             case RIGHT -> x += speed;
             case DOWN -> y += speed;
         }
-        
+
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
@@ -90,7 +90,9 @@ public class Bullet implements Serializable {
         if (rectangle.intersects(tankRectangle)) {
             tank.die();
             this.die();
-            tf.explodes.add(new Explode(x, y, tf));
+            int ex = tank.getX() + Tank.TANK_WIDTH / 2 - Explode.EXPLODE_WIDTH / 2;
+            int ey = tank.getY() + Tank.TANK_HEIGHT / 2 - Explode.EXPLODE_HEIGHT / 2;
+            tf.explodes.add(new Explode(ex, ey, tf));
         }
     }
 
