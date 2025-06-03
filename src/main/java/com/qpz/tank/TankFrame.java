@@ -1,6 +1,7 @@
 package com.qpz.tank;
 
 import com.qpz.tank.enums.DirEnum;
+import com.qpz.tank.enums.Group;
 import com.qpz.tank.model.Bullet;
 import com.qpz.tank.model.Tank;
 
@@ -28,7 +29,7 @@ public class TankFrame extends Frame {
     // 敌方坦克
     public List<Tank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
-    Tank myTank = new Tank(200, 200, DirEnum.DOWN, this);
+    Tank myTank = new Tank(200, 200, DirEnum.DOWN, Group.GOOD, this);
     Image offScreenImage = null;
 
 

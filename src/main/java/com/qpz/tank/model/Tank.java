@@ -3,6 +3,7 @@ package com.qpz.tank.model;
 import com.qpz.tank.ResourceMgr;
 import com.qpz.tank.TankFrame;
 import com.qpz.tank.enums.DirEnum;
+import com.qpz.tank.enums.Group;
 
 import java.awt.*;
 import java.io.Serial;
@@ -31,14 +32,15 @@ public class Tank implements Serializable {
     private boolean moving = false;
     // 坦克灭亡  默认存活
     private boolean living = true;
-
+    private Group group = Group.BAD;
     private Random random = new Random();
 
-    public Tank(int x, int y, DirEnum dir, TankFrame tf) {
+    public Tank(int x, int y, DirEnum dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tf = tf;
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -82,7 +84,7 @@ public class Tank implements Serializable {
     public void fire() {
         int bx = this.x + Tank.width / 2 - Bullet.width / 2;
         int by = this.y + Tank.height / 2 - Bullet.height / 2;
-        tf.bullets.add(new Bullet(bx, by, this.dir, this.tf));
+        tf.bullets.add(new Bullet(bx, by, this.dir, this.group, this.tf));
     }
 
     public void die() {
@@ -119,5 +121,37 @@ public class Tank implements Serializable {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
+    }
+
+    public boolean isLiving() {
+        return living;
+    }
+
+    public void setLiving(boolean living) {
+        this.living = living;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
     }
 }
