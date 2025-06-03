@@ -29,7 +29,8 @@ public class TankFrame extends Frame {
     // 敌方坦克
     public List<Tank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
-    Tank myTank = new Tank(200, 200, DirEnum.DOWN, Group.GOOD, this);
+    public Tank myTank = new Tank(200, 200, DirEnum.DOWN, Group.GOOD, this);
+    public Explode e = new Explode(100, 100, this);
     Image offScreenImage = null;
 
 
@@ -94,6 +95,7 @@ public class TankFrame extends Frame {
                 }
             }
         }
+        e.paint(g);
     }
 
 
