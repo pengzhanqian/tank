@@ -2,6 +2,7 @@ package com.qpz.tank.designpattern;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
+import java.util.Objects;
 
 public class DpAudio {
 
@@ -12,14 +13,17 @@ public class DpAudio {
     private AudioInputStream audioInputStream = null;
 
     public DpAudio(String fileName) {
+        String audioSwitch = DpPropertyMgr.getProperty("audioSwitch");
+        if (!(Objects.nonNull(audioSwitch) && audioSwitch.equals("true"))) {
+            return;
+        }
         try {
-            audioInputStream = AudioSystem.getAudioInputStream(DpAudio.class.getClassLoader().getResource(fileName));
+            audioInputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(DpAudio.class.getClassLoader().getResource(fileName)));
             audioFormat = audioInputStream.getFormat();
             dataLine_info = new DataLine.Info(SourceDataLine.class, audioFormat);
             sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLine_info);
             //FloatControl volctrl=(FloatControl)sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
             //volctrl.setValue(-40);//
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -24,6 +24,7 @@ public class DpTankFrame extends Frame {
     // 批量爆炸
     public List<DpExplode> explodes = new CopyOnWriteArrayList<>();
     public Image offScreenImage = null;
+    public boolean endFlag = true;
 
 
     public DpTankFrame() throws HeadlessException {
@@ -93,6 +94,15 @@ public class DpTankFrame extends Frame {
                 }
             }
         }
+    }
+
+    public void end() {
+        this.endFlag = false;
+    }
+
+    public void reInit() {
+        this.endFlag = true;
+        this.myTank.speed = DpPropertyMgr.getIntProperty("tankSpeed");
     }
 
 

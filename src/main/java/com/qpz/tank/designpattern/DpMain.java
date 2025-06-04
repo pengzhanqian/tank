@@ -5,18 +5,13 @@ import javax.swing.*;
 public class DpMain {
     public static void main(String[] args) throws InterruptedException {
         DpTankFrame dpTf = new DpTankFrame();
-        //初始化敌方坦克
-        int initTankCount = DpPropertyMgr.getIntProperty("initTankCount");
-        for (int i = 0; i < initTankCount; i++) {
-            dpTf.tanks.add(new DpTank(50 + i * 80, 200, true, DpDir.DOWN, DpGroup.BAD, dpTf));
-        }
+        initBadTanks(dpTf);
 
         // 音效
         new Thread(() -> new DpAudio("audio/war1.wav").loop()).start();
 
-        boolean endFlag = true;
         boolean tankSpeedAddFlag = false;
-        while (endFlag) {
+        while (dpTf.endFlag) {
             Thread.sleep(25);
             dpTf.repaint();
             if (dpTf.tanks.size() < 5 && !tankSpeedAddFlag) {
@@ -34,18 +29,28 @@ public class DpMain {
                         new Object[]{"继续游戏", "结束游戏"},
                         "继续游戏"
                 );
-                endFlag = false;
+                dpTf.end();
                 if (choice == 0) {
-                    for (int i = 0; i < initTankCount; i++) {
-                        dpTf.tanks.add(new DpTank(50 + i * 80, 200, true, DpDir.DOWN, DpGroup.BAD, dpTf));
-                    }
-                    endFlag = true;
-                    dpTf.myTank.speed = DpPropertyMgr.getIntProperty("tankSpeed");
+                    initBadTanks(dpTf);
+                    dpTf.reInit();
                 } else {
                     System.exit(0);
                 }
 
             }
+        }
+    }
+
+    /**
+     * 初始化敌方坦克
+     *
+     * @param dpTf
+     */
+    private static void initBadTanks(DpTankFrame dpTf) {
+        //初始化敌方坦克
+        int initTankCount = DpPropertyMgr.getIntProperty("initTankCount");
+        for (int i = 0; i < initTankCount; i++) {
+            dpTf.tanks.add(new DpTank(50 + i * 80, 200, true, DpDir.DOWN, DpGroup.BAD, dpTf));
         }
     }
 }
