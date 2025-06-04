@@ -1,4 +1,4 @@
-package com.qpz.tank.dp;
+package com.qpz.tank.designpattern;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

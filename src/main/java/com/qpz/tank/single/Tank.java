@@ -1,6 +1,6 @@
 package com.qpz.tank.single;
 
-import com.qpz.tank.dp.DpResourceMgr;
+import com.qpz.tank.designpattern.DpResourceMgr;
 
 import java.awt.*;
 import java.io.Serial;

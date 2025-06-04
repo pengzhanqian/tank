@@ -1,4 +1,4 @@
-package com.qpz.tank.dp;
+package com.qpz.tank.designpattern;
 
 import java.io.IOException;
 import java.util.Properties;
