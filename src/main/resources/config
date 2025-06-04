@@ -3,3 +3,6 @@ tankSpeed=2
 bulletSpeed=6
 gameWidth=1080
 gameHeight=960
+#fireStrategy
+goodFS=com.qpz.tank.designpattern.strategy.DpFourDirFireStrategy
+badFS=com.qpz.tank.designpattern.strategy.DpDefaultFireStrategy

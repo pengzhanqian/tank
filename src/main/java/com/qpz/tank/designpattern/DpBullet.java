@@ -16,21 +16,21 @@ public class DpBullet implements Serializable {
     // 子弹的大小
     public static final int BULLET_WIDTH = DpResourceMgr.bulletD.getWidth();
     public static final int BULLET_HEIGHT = DpResourceMgr.bulletD.getHeight();
+    // 子弹的移动速度
+    public static final int speed = DpPropertyMgr.getIntProperty("bulletSpeed");
     @Serial
     private static final long serialVersionUID = -9091245601031262535L;
-    // 子弹的移动速度
-    private static final int speed = DpPropertyMgr.getIntProperty("bulletSpeed");
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
     // 子弹的位置
-    private int x;
-    private int y;
+    public int x;
+    public int y;
     // 子弹的方向
-    private DpDir dir;
+    public DpDir dir;
     // 子弹是否存活
-    private boolean living = true;
+    public boolean living = true;
     // 持有坦克框的引用
-    private DpTankFrame tf;
-    private DpGroup group;
+    public DpTankFrame tf;
+    public DpGroup group;
 
     public DpBullet(int x, int y, DpDir dir, DpGroup group, DpTankFrame tf) {
         this.x = x;
@@ -88,65 +88,17 @@ public class DpBullet implements Serializable {
      */
     public void collideWith(DpTank tank) {
         // 分组相同 则不用检测
-        if (this.group == tank.getGroup()) return;
+        if (this.group == tank.group) return;
         if (this.rect.intersects(tank.rect)) {
             tank.die();
             this.die();
-            int ex = tank.getX() + DpTank.TANK_WIDTH / 2 - DpExplode.EXPLODE_WIDTH / 2;
-            int ey = tank.getY() + DpTank.TANK_HEIGHT / 2 - DpExplode.EXPLODE_HEIGHT / 2;
+            int ex = tank.x + DpTank.TANK_WIDTH / 2 - DpExplode.EXPLODE_WIDTH / 2;
+            int ey = tank.y + DpTank.TANK_HEIGHT / 2 - DpExplode.EXPLODE_HEIGHT / 2;
             tf.explodes.add(new DpExplode(ex, ey, tf));
         }
     }
 
     private void die() {
         this.living = false;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public DpDir getDir() {
-        return dir;
-    }
-
-    public void setDir(DpDir dir) {
-        this.dir = dir;
-    }
-
-    public boolean isLiving() {
-        return living;
-    }
-
-    public void setLiving(boolean living) {
-        this.living = living;
-    }
-
-    public DpGroup getGroup() {
-        return group;
-    }
-
-    public void setGroup(DpGroup group) {
-        this.group = group;
-    }
-
-    public DpTankFrame getTf() {
-        return tf;
-    }
-
-    public void setTf(DpTankFrame tf) {
-        this.tf = tf;
     }
 }

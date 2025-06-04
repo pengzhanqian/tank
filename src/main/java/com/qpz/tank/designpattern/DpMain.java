@@ -20,7 +20,7 @@ public class DpMain {
             Thread.sleep(25);
             dpTf.repaint();
             if (dpTf.tanks.size() < 5 && !tankSpeedAddFlag) {
-                dpTf.myTank.setSpeed(dpTf.myTank.getSpeed() + 1);
+                dpTf.myTank.speed = dpTf.myTank.speed + 1;
                 tankSpeedAddFlag = true;
             }
             if (dpTf.tanks.isEmpty()) {
@@ -40,7 +40,7 @@ public class DpMain {
                         dpTf.tanks.add(new DpTank(50 + i * 80, 200, true, DpDir.DOWN, DpGroup.BAD, dpTf));
                     }
                     endFlag = true;
-                    dpTf.myTank.setSpeed(DpPropertyMgr.getIntProperty("tankSpeed"));
+                    dpTf.myTank.speed = DpPropertyMgr.getIntProperty("tankSpeed");
                 } else {
                     System.exit(0);
                 }

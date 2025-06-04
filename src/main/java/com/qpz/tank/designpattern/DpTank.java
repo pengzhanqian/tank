@@ -1,5 +1,8 @@
 package com.qpz.tank.designpattern;
 
+import com.qpz.tank.designpattern.strategy.DpDefaultFireStrategy;
+import com.qpz.tank.designpattern.strategy.DpFireStrategy;
+
 import java.awt.*;
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,20 +18,21 @@ public class DpTank implements Serializable {
     public static final int TANK_HEIGHT = DpResourceMgr.goodTankU1.getHeight();
     @Serial
     private static final long serialVersionUID = -4327244887078026900L;
-    Rectangle rect = new Rectangle();
     // 坦克的移动速度
-    private int speed;
+    public int speed;
     // 坦克的位置
-    private int x;
-    private int y;
+    public int x;
+    public int y;
     // 坦克的方向
-    private DpDir dir;
-    private DpTankFrame tf;
+    public DpDir dir;
+    public DpTankFrame tf;
     // 坦克是否移动
-    private boolean moving;
+    public boolean moving;
     // 坦克灭亡  默认存活
-    private boolean living = true;
-    private DpGroup group;
+    public boolean living = true;
+    public DpGroup group;
+    public DpFireStrategy fs;
+    public Rectangle rect = new Rectangle();
     private Random random = new Random();
 
     public DpTank(int x, int y, boolean moving, DpDir dir, DpGroup group, DpTankFrame tf) {
@@ -44,6 +48,24 @@ public class DpTank implements Serializable {
         rect.y = this.y;
         rect.width = TANK_WIDTH;
         rect.height = TANK_HEIGHT;
+
+        if (group == DpGroup.GOOD) {
+            String goodFSName = DpPropertyMgr.getProperty("goodFS");
+            try {
+                fs = (DpFireStrategy) Class.forName(goodFSName).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (group == DpGroup.BAD) {
+            String goodFSName = DpPropertyMgr.getProperty("badFS");
+            try {
+                fs = (DpFireStrategy) Class.forName(goodFSName).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            fs = new DpDefaultFireStrategy();
+        }
     }
 
     public void paint(Graphics g) {
@@ -127,78 +149,10 @@ public class DpTank implements Serializable {
 
 
     public void fire() {
-        int bx = this.x + DpTank.TANK_WIDTH / 2 - DpBullet.BULLET_WIDTH / 2;
-        int by = this.y + DpTank.TANK_HEIGHT / 2 - DpBullet.BULLET_HEIGHT / 2;
-        tf.bullets.add(new DpBullet(bx, by, this.dir, this.group, this.tf));
-        // 增加坦克开火音效
-        if (this.group == DpGroup.GOOD) new Thread(() -> new DpAudio("audio/tank_fire.wav").play()).start();
+        fs.fire(this);
     }
 
     public void die() {
         this.living = false;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public DpDir getDir() {
-        return dir;
-    }
-
-    public void setDir(DpDir dir) {
-        this.dir = dir;
-    }
-
-    public boolean isMoving() {
-        return moving;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
-    public DpTankFrame getTf() {
-        return tf;
-    }
-
-    public void setTf(DpTankFrame tf) {
-        this.tf = tf;
-    }
-
-    public boolean isLiving() {
-        return living;
-    }
-
-    public void setLiving(boolean living) {
-        this.living = living;
-    }
-
-    public DpGroup getGroup() {
-        return group;
-    }
-
-    public void setGroup(DpGroup group) {
-        this.group = group;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
     }
 }

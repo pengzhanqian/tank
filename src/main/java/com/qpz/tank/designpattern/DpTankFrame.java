@@ -23,7 +23,7 @@ public class DpTankFrame extends Frame {
     public DpTank myTank = new DpTank(540 - DpTank.TANK_WIDTH, 960 - DpTank.TANK_HEIGHT, false, DpDir.UP, DpGroup.GOOD, this);
     // 批量爆炸
     public List<DpExplode> explodes = new CopyOnWriteArrayList<>();
-    Image offScreenImage = null;
+    public Image offScreenImage = null;
 
 
     public DpTankFrame() throws HeadlessException {
@@ -64,10 +64,10 @@ public class DpTankFrame extends Frame {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("子弹的数量为" + bullets.size() + ", 主战坦克的坐标: (" + myTank.getX() + ", " + myTank.getY() + " ), 方向:" + myTank.getDir().name(), 10, 60);
+        g.drawString("子弹的数量为" + bullets.size() + ", 主战坦克的坐标: (" + myTank.x + ", " + myTank.y + " ), 方向:" + myTank.dir.name(), 10, 60);
         g.drawString("敌方坦克数量: " + tanks.size(), 10, 80);
         g.drawString("爆炸的数量: " + tanks.size(), 10, 100);
-        g.drawString("主战坦克的速度: " + myTank.getSpeed(), 10, 120);
+        g.drawString("主战坦克的速度: " + myTank.speed, 10, 120);
         g.setColor(c);
         myTank.paint(g);
         if (!bullets.isEmpty()) {
@@ -176,13 +176,13 @@ public class DpTankFrame extends Frame {
 
         private void setMainTankDir() {
             if (!bl && !bu && !br && !bd) {
-                myTank.setMoving(false);
+                myTank.moving = false;
             } else {
-                myTank.setMoving(true);
-                if (bl) myTank.setDir(DpDir.LEFT);
-                if (bu) myTank.setDir(DpDir.UP);
-                if (br) myTank.setDir(DpDir.RIGHT);
-                if (bd) myTank.setDir(DpDir.DOWN);
+                myTank.moving = true;
+                if (bl) myTank.dir = DpDir.LEFT;
+                if (bu) myTank.dir = DpDir.UP;
+                if (br) myTank.dir = DpDir.RIGHT;
+                if (bd) myTank.dir = DpDir.DOWN;
             }
         }
     }
