@@ -6,7 +6,7 @@ package com.qpz.tank.designpattern;
  * @author pengzhan.qian
  * @since 2025/5/30 10:15
  **/
-public enum DpDirEnum {
+public enum DpDir {
     LEFT,
     UP,
     RIGHT,

@@ -20,7 +20,7 @@ public class DpTankFrame extends Frame {
     // 敌方坦克
     public List<DpTank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
-    public DpTank myTank = new DpTank(540 - DpTank.TANK_WIDTH, 960 - DpTank.TANK_HEIGHT, false, DpDirEnum.UP, DpGroup.GOOD, this);
+    public DpTank myTank = new DpTank(540 - DpTank.TANK_WIDTH, 960 - DpTank.TANK_HEIGHT, false, DpDir.UP, DpGroup.GOOD, this);
     // 批量爆炸
     public List<DpExplode> explodes = new CopyOnWriteArrayList<>();
     Image offScreenImage = null;
@@ -179,10 +179,10 @@ public class DpTankFrame extends Frame {
                 myTank.setMoving(false);
             } else {
                 myTank.setMoving(true);
-                if (bl) myTank.setDir(DpDirEnum.LEFT);
-                if (bu) myTank.setDir(DpDirEnum.UP);
-                if (br) myTank.setDir(DpDirEnum.RIGHT);
-                if (bd) myTank.setDir(DpDirEnum.DOWN);
+                if (bl) myTank.setDir(DpDir.LEFT);
+                if (bu) myTank.setDir(DpDir.UP);
+                if (br) myTank.setDir(DpDir.RIGHT);
+                if (bd) myTank.setDir(DpDir.DOWN);
             }
         }
     }

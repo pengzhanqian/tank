@@ -25,14 +25,14 @@ public class DpBullet implements Serializable {
     private int x;
     private int y;
     // 子弹的方向
-    private DpDirEnum dir;
+    private DpDir dir;
     // 子弹是否存活
     private boolean living = true;
     // 持有坦克框的引用
     private DpTankFrame tf;
     private DpGroup group;
 
-    public DpBullet(int x, int y, DpDirEnum dir, DpGroup group, DpTankFrame tf) {
+    public DpBullet(int x, int y, DpDir dir, DpGroup group, DpTankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -118,11 +118,11 @@ public class DpBullet implements Serializable {
         this.y = y;
     }
 
-    public DpDirEnum getDir() {
+    public DpDir getDir() {
         return dir;
     }
 
-    public void setDir(DpDirEnum dir) {
+    public void setDir(DpDir dir) {
         this.dir = dir;
     }
 

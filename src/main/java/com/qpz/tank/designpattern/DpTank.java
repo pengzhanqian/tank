@@ -22,7 +22,7 @@ public class DpTank implements Serializable {
     private int x;
     private int y;
     // 坦克的方向
-    private DpDirEnum dir;
+    private DpDir dir;
     private DpTankFrame tf;
     // 坦克是否移动
     private boolean moving;
@@ -31,7 +31,7 @@ public class DpTank implements Serializable {
     private DpGroup group;
     private Random random = new Random();
 
-    public DpTank(int x, int y, boolean moving, DpDirEnum dir, DpGroup group, DpTankFrame tf) {
+    public DpTank(int x, int y, boolean moving, DpDir dir, DpGroup group, DpTankFrame tf) {
         this.x = x;
         this.y = y;
         this.moving = moving;
@@ -122,7 +122,7 @@ public class DpTank implements Serializable {
     }
 
     private void randomDir() {
-        this.dir = DpDirEnum.values()[random.nextInt(DpDirEnum.values().length)];
+        this.dir = DpDir.values()[random.nextInt(DpDir.values().length)];
     }
 
 
@@ -154,11 +154,11 @@ public class DpTank implements Serializable {
         this.y = y;
     }
 
-    public DpDirEnum getDir() {
+    public DpDir getDir() {
         return dir;
     }
 
-    public void setDir(DpDirEnum dir) {
+    public void setDir(DpDir dir) {
         this.dir = dir;
     }
 

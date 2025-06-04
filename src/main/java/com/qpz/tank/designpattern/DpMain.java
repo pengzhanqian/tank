@@ -8,7 +8,7 @@ public class DpMain {
         //初始化敌方坦克
         int initTankCount = DpPropertyMgr.getIntProperty("initTankCount");
         for (int i = 0; i < initTankCount; i++) {
-            dpTf.tanks.add(new DpTank(50 + i * 80, 200, true, DpDirEnum.DOWN, DpGroup.BAD, dpTf));
+            dpTf.tanks.add(new DpTank(50 + i * 80, 200, true, DpDir.DOWN, DpGroup.BAD, dpTf));
         }
 
         // 音效
@@ -37,7 +37,7 @@ public class DpMain {
                 endFlag = false;
                 if (choice == 0) {
                     for (int i = 0; i < initTankCount; i++) {
-                        dpTf.tanks.add(new DpTank(50 + i * 80, 200, true, DpDirEnum.DOWN, DpGroup.BAD, dpTf));
+                        dpTf.tanks.add(new DpTank(50 + i * 80, 200, true, DpDir.DOWN, DpGroup.BAD, dpTf));
                     }
                     endFlag = true;
                     dpTf.myTank.setSpeed(DpPropertyMgr.getIntProperty("tankSpeed"));
