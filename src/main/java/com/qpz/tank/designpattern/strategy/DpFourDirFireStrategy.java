@@ -1,7 +1,6 @@
 package com.qpz.tank.designpattern.strategy;
 
 import com.qpz.tank.designpattern.*;
-import com.qpz.tank.single.Audio;
 
 /**
  * 4个方向同时开火
@@ -25,6 +24,6 @@ public class DpFourDirFireStrategy implements DpFireStrategy {
             new DpBullet(bX, bY, dir, t.group, t.tf);
         }
 
-        if (t.group == DpGroup.GOOD) new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+        if (t.group == DpGroup.GOOD) new Thread(() -> new DpAudio("audio/tank_fire.wav").play()).start();
     }
 }

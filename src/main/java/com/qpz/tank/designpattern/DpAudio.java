@@ -30,6 +30,10 @@ public class DpAudio {
     }
 
     public void loop() {
+        String audioSwitch = DpPropertyMgr.getProperty("audioSwitch");
+        if (!(Objects.nonNull(audioSwitch) && audioSwitch.equals("true"))) {
+            return;
+        }
         try {
             while (true) {
                 int len = 0;
@@ -52,6 +56,10 @@ public class DpAudio {
     }
 
     public void play() {
+        String audioSwitch = DpPropertyMgr.getProperty("audioSwitch");
+        if (!(Objects.nonNull(audioSwitch) && audioSwitch.equals("true"))) {
+            return;
+        }
         try {
             byte[] b = new byte[1024 * 5];
             int len = 0;
@@ -73,6 +81,10 @@ public class DpAudio {
     }
 
     public void close() {
+        String audioSwitch = DpPropertyMgr.getProperty("audioSwitch");
+        if (!(Objects.nonNull(audioSwitch) && audioSwitch.equals("true"))) {
+            return;
+        }
         try {
             audioInputStream.close();
         } catch (IOException e) {
