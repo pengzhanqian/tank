@@ -42,6 +42,9 @@ public class DpBullet implements Serializable {
         rect.y = this.y;
         rect.width = BULLET_WIDTH;
         rect.height = BULLET_HEIGHT;
+
+        // 子弹加入列表
+        tf.bullets.add(this);
     }
 
     public void paint(Graphics g) {

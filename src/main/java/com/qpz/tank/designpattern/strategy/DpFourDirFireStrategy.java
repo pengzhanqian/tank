@@ -22,7 +22,7 @@ public class DpFourDirFireStrategy implements DpFireStrategy {
 
         DpDir[] dirs = DpDir.values();
         for (DpDir dir : dirs) {
-            t.tf.bullets.add(new DpBullet(bX, bY, dir, t.group, t.tf));
+            new DpBullet(bX, bY, dir, t.group, t.tf);
         }
 
         if (t.group == DpGroup.GOOD) new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
