@@ -1,7 +1,5 @@
 package com.qpz.tank.single;
 
-import com.qpz.tank.single.util.ImageUtil;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

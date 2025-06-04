@@ -1,4 +1,4 @@
-package com.qpz.tank.single.enums;
+package com.qpz.tank.single;
 
 /**
  * 坦克方向枚举
@@ -6,7 +6,7 @@ package com.qpz.tank.single.enums;
  * @author pengzhan.qian
  * @since 2025/5/30 10:15
  **/
-public enum DirEnum {
+public enum Dir {
     LEFT,
     UP,
     RIGHT,

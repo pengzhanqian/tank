@@ -1,8 +1,4 @@
-package com.qpz.tank.single.model;
-
-import com.qpz.tank.single.*;
-import com.qpz.tank.single.enums.DirEnum;
-import com.qpz.tank.single.enums.Group;
+package com.qpz.tank.single;
 
 import java.awt.*;
 import java.io.Serial;
@@ -28,14 +24,14 @@ public class Bullet implements Serializable {
     private int x;
     private int y;
     // 子弹的方向
-    private DirEnum dir;
+    private Dir dir;
     // 子弹是否存活
     private boolean living = true;
     // 持有坦克框的引用
     private TankFrame tf;
     private Group group;
 
-    public Bullet(int x, int y, DirEnum dir, Group group, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -121,11 +117,11 @@ public class Bullet implements Serializable {
         this.y = y;
     }
 
-    public DirEnum getDir() {
+    public Dir getDir() {
         return dir;
     }
 
-    public void setDir(DirEnum dir) {
+    public void setDir(Dir dir) {
         this.dir = dir;
     }
 

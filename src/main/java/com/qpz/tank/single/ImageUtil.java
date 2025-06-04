@@ -1,4 +1,4 @@
-package com.qpz.tank.single.util;
+package com.qpz.tank.single;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

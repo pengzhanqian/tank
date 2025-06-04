@@ -1,9 +1,6 @@
-package com.qpz.tank.single.model;
+package com.qpz.tank.single;
 
 import com.qpz.tank.dp.DpResourceMgr;
-import com.qpz.tank.single.*;
-import com.qpz.tank.single.enums.DirEnum;
-import com.qpz.tank.single.enums.Group;
 
 import java.awt.*;
 import java.io.Serial;
@@ -27,7 +24,7 @@ public class Tank implements Serializable {
     private int x;
     private int y;
     // 坦克的方向
-    private DirEnum dir;
+    private Dir dir;
     private TankFrame tf;
     // 坦克是否移动
     private boolean moving;
@@ -36,7 +33,7 @@ public class Tank implements Serializable {
     private Group group;
     private Random random = new Random();
 
-    public Tank(int x, int y, boolean moving, DirEnum dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, boolean moving, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.moving = moving;
@@ -126,7 +123,7 @@ public class Tank implements Serializable {
     }
 
     private void randomDir() {
-        this.dir = DirEnum.values()[random.nextInt(DirEnum.values().length)];
+        this.dir = Dir.values()[random.nextInt(Dir.values().length)];
     }
 
 
@@ -158,11 +155,11 @@ public class Tank implements Serializable {
         this.y = y;
     }
 
-    public DirEnum getDir() {
+    public Dir getDir() {
         return dir;
     }
 
-    public void setDir(DirEnum dir) {
+    public void setDir(Dir dir) {
         this.dir = dir;
     }
 

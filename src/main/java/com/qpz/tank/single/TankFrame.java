@@ -1,10 +1,5 @@
 package com.qpz.tank.single;
 
-import com.qpz.tank.single.enums.DirEnum;
-import com.qpz.tank.single.enums.Group;
-import com.qpz.tank.single.model.Bullet;
-import com.qpz.tank.single.model.Tank;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
@@ -25,7 +20,7 @@ public class TankFrame extends Frame {
     // 敌方坦克
     public List<Tank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
-    public Tank myTank = new Tank(540 - Tank.TANK_WIDTH, 960 - Tank.TANK_HEIGHT, false, DirEnum.UP, Group.GOOD, this);
+    public Tank myTank = new Tank(540 - Tank.TANK_WIDTH, 960 - Tank.TANK_HEIGHT, false, Dir.UP, Group.GOOD, this);
     // 批量爆炸
     public List<Explode> explodes = new CopyOnWriteArrayList<>();
     Image offScreenImage = null;
@@ -182,10 +177,10 @@ public class TankFrame extends Frame {
                 myTank.setMoving(false);
             } else {
                 myTank.setMoving(true);
-                if (bl) myTank.setDir(DirEnum.LEFT);
-                if (bu) myTank.setDir(DirEnum.UP);
-                if (br) myTank.setDir(DirEnum.RIGHT);
-                if (bd) myTank.setDir(DirEnum.DOWN);
+                if (bl) myTank.setDir(Dir.LEFT);
+                if (bu) myTank.setDir(Dir.UP);
+                if (br) myTank.setDir(Dir.RIGHT);
+                if (bd) myTank.setDir(Dir.DOWN);
             }
         }
     }
