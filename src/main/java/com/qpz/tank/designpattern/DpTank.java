@@ -16,6 +16,9 @@ public class DpTank implements Serializable {
     // 坦克的大小
     public static final int TANK_WIDTH = DpResourceMgr.goodTankU1.getWidth();
     public static final int TANK_HEIGHT = DpResourceMgr.goodTankU1.getHeight();
+    public static final int INIT_X = 540 - DpTank.TANK_WIDTH;
+    public static final int INIT_Y = 960 - DpTank.TANK_HEIGHT;
+    public static final DpDir INIT_DIR = DpDir.UP;
     @Serial
     private static final long serialVersionUID = -4327244887078026900L;
     // 坦克的移动速度
@@ -154,5 +157,13 @@ public class DpTank implements Serializable {
 
     public void die() {
         this.living = false;
+    }
+
+    public void reInit() {
+        this.x = INIT_X;
+        this.y = INIT_Y;
+        this.dir = DpTank.INIT_DIR;
+        this.moving = false;
+        this.speed = DpPropertyMgr.getIntProperty("tankSpeed");
     }
 }

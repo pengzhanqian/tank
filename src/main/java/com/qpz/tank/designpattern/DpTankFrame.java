@@ -20,7 +20,7 @@ public class DpTankFrame extends Frame {
     // 敌方坦克
     public List<DpTank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
-    public DpTank myTank = new DpTank(540 - DpTank.TANK_WIDTH, 960 - DpTank.TANK_HEIGHT, false, DpDir.UP, DpGroup.GOOD, this);
+    public DpTank myTank = new DpTank(DpTank.INIT_X, DpTank.INIT_Y, false, DpTank.INIT_DIR, DpGroup.GOOD, this);
     // 批量爆炸
     public List<DpExplode> explodes = new CopyOnWriteArrayList<>();
     public Image offScreenImage = null;
@@ -103,6 +103,8 @@ public class DpTankFrame extends Frame {
     public void reInit() {
         this.endFlag = true;
         this.myTank.speed = DpPropertyMgr.getIntProperty("tankSpeed");
+        this.bullets = new CopyOnWriteArrayList<>();
+        this.myTank.reInit();
     }
 
 
