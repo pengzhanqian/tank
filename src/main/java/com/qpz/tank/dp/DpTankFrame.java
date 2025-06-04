@@ -129,7 +129,8 @@ public class DpTankFrame extends Frame {
             //x = x + 10;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
             String format = sdf.format(new Date());
-            System.out.println("datetime:" + format + ": key pressed: " + e.getKeyCode() + ", x: " + myTank.getX() + ", y: " + myTank.getY());
+            //System.out.println("datetime:" + format + ": key pressed: " + e.getKeyCode() + ", x: " + myTank.getX()
+            // + ", y: " + myTank.getY());
             // repaint() 会默认调用1次 paint() 用户可以这样 但是敌人是自动移动的 所以不能都这么用
             // repaint();
 
