@@ -18,7 +18,7 @@ public class DpTankFrame extends Frame {
     public static final int GAME_WIDTH = DpPropertyMgr.getIntProperty("gameWidth");
     public static final int GAME_HEIGHT = DpPropertyMgr.getIntProperty("gameHeight");
     public RectFactory rf = new RectFactory();
-    public RectTank myTank;
+    public RectTank myTank = (RectTank) rf.createTank(RectTank.INIT_X, RectTank.INIT_Y, false, RectTank.INIT_DIR, DpGroup.GOOD, this);
     public List<AbstractBullet> bullets = new CopyOnWriteArrayList<>();
     public List<AbstractTank> tanks = new CopyOnWriteArrayList<>();
     public List<AbstractExplode> explodes = new CopyOnWriteArrayList<>();
@@ -40,7 +40,7 @@ public class DpTankFrame extends Frame {
             }
         });
         this.addKeyListener(new MyKeyListener());
-        this.myTank = (RectTank) rf.createTank(RectTank.INIT_X, RectTank.INIT_Y, false, RectTank.INIT_DIR, DpGroup.GOOD, this);
+
     }
 
     /**
