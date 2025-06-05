@@ -1,9 +1,9 @@
 package com.qpz.tank.designpattern;
 
+import com.qpz.tank.designpattern.factory.*;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -16,13 +16,13 @@ public class DpTankFrame extends Frame {
     public static final int GAME_WIDTH = DpPropertyMgr.getIntProperty("gameWidth");
     public static final int GAME_HEIGHT = DpPropertyMgr.getIntProperty("gameHeight");
     // 批量子弹 使用容器  使用CopyOnWriteArrayList等并发集合  防止多线程下1个线程遍历一个线程删除导致报错  java.util.ConcurrentModificationException
-    public List<DpBullet> bullets = new CopyOnWriteArrayList<>();
+    public List<AbstractBullet> bullets = new CopyOnWriteArrayList<>();
     // 敌方坦克
-    public List<DpTank> tanks = new CopyOnWriteArrayList<>();
+    public List<AbstractTank> tanks = new CopyOnWriteArrayList<>();
     // 初始化主战坦克
-    public DpTank myTank = new DpTank(DpTank.INIT_X, DpTank.INIT_Y, false, DpTank.INIT_DIR, DpGroup.GOOD, this);
+    public RectTank myTank = new RectTank(RectTank.INIT_X, RectTank.INIT_Y, false, RectTank.INIT_DIR, DpGroup.GOOD, this);
     // 批量爆炸
-    public List<DpExplode> explodes = new CopyOnWriteArrayList<>();
+    public List<AbstractExplode> explodes = new CopyOnWriteArrayList<>();
     public Image offScreenImage = null;
     public boolean endFlag = true;
 
@@ -73,24 +73,24 @@ public class DpTankFrame extends Frame {
         myTank.paint(g);
         if (!bullets.isEmpty()) {
             // 防止内存泄露
-            for (DpBullet bullet : bullets) {
+            for (AbstractBullet bullet : bullets) {
                 bullet.paint(g);
             }
         }
         if (!tanks.isEmpty()) {
-            for (int i = 0; i < tanks.size(); i++) {
-                tanks.get(i).paint(g);
+            for (AbstractTank tank : tanks) {
+                tank.paint(g);
             }
         }
         if (!explodes.isEmpty()) {
-            for (int i = 0; i < explodes.size(); i++) {
-                explodes.get(i).paint(g);
+            for (AbstractExplode explode : explodes) {
+                explode.paint(g);
             }
         }
         if (!bullets.isEmpty() && !tanks.isEmpty()) {
-            for (int i = 0; i < bullets.size(); i++) {
-                for (int j = 0; j < tanks.size(); j++) {
-                    bullets.get(i).collideWith(tanks.get(j));
+            for (AbstractBullet bullet : bullets) {
+                for (AbstractTank tank : tanks) {
+                    bullet.collideWith(tank);
                 }
             }
         }
@@ -137,20 +137,12 @@ public class DpTankFrame extends Frame {
                     //y += 10;
                     break;
             }
-            // 1个建被按下去的时候调用
-            //x = x + 10;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-            String format = sdf.format(new Date());
-            //System.out.println("datetime:" + format + ": key pressed: " + e.getKeyCode() + ", x: " + myTank.getX()
-            // + ", y: " + myTank.getY());
-            // repaint() 会默认调用1次 paint() 用户可以这样 但是敌人是自动移动的 所以不能都这么用
-            // repaint();
 
             // 键按下去改变主战坦克方向
             setMainTankDir();
 
             // 键按下去会出现坦克移动音效
-            //new Thread(() -> new Audio("audio/tank_move.wav").play()).start();
+            new Thread(() -> new DpAudio("audio/tank_move.wav").play()).start();
         }
 
         @Override

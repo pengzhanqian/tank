@@ -1,5 +1,7 @@
 package com.qpz.tank.designpattern;
 
+import com.qpz.tank.designpattern.factory.RectTank;
+
 import javax.swing.*;
 
 public class DpMain {
@@ -50,7 +52,7 @@ public class DpMain {
         //初始化敌方坦克
         int initTankCount = DpPropertyMgr.getIntProperty("initTankCount");
         for (int i = 0; i < initTankCount; i++) {
-            dpTf.tanks.add(new DpTank(50 + i * 80, 200, true, DpDir.DOWN, DpGroup.BAD, dpTf));
+            dpTf.tanks.add(new RectTank(50 + i * 80, 200, true, DpDir.DOWN, DpGroup.BAD, dpTf));
         }
     }
 }

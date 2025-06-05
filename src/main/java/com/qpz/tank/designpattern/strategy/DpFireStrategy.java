@@ -1,6 +1,6 @@
 package com.qpz.tank.designpattern.strategy;
 
-import com.qpz.tank.designpattern.DpTank;
+import com.qpz.tank.designpattern.factory.AbstractTank;
 
 /**
  * 开火策略
@@ -16,5 +16,5 @@ public interface DpFireStrategy {
      *
      * @param t 坦克
      */
-    void fire(DpTank t);
+    void fire(AbstractTank t);
 }

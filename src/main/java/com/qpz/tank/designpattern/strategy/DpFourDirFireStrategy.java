@@ -1,6 +1,8 @@
 package com.qpz.tank.designpattern.strategy;
 
 import com.qpz.tank.designpattern.*;
+import com.qpz.tank.designpattern.factory.AbstractTank;
+import com.qpz.tank.designpattern.factory.RectBullet;
 
 /**
  * 4个方向同时开火
@@ -15,15 +17,13 @@ public class DpFourDirFireStrategy implements DpFireStrategy {
      * @param t 坦克
      */
     @Override
-    public void fire(DpTank t) {
-        int bX = t.x + DpTank.TANK_WIDTH / 2 - DpBullet.BULLET_WIDTH / 2;
-        int bY = t.y + DpTank.TANK_HEIGHT / 2 - DpBullet.BULLET_HEIGHT / 2;
-
+    public void fire(AbstractTank t) {
+        int bX = t.getX() + t.getWidth() / 2 - RectBullet.BULLET_WIDTH / 2;
+        int bY = t.getY() + t.getHeight() / 2 - RectBullet.BULLET_HEIGHT / 2;
         DpDir[] dirs = DpDir.values();
         for (DpDir dir : dirs) {
-            new DpBullet(bX, bY, dir, t.group, t.tf);
+            new RectBullet(bX, bY, dir, t.group(), t.dpTf());
         }
-
-        if (t.group == DpGroup.GOOD) new Thread(() -> new DpAudio("audio/tank_fire.wav").play()).start();
+        if (t.group() == DpGroup.GOOD) new Thread(() -> new DpAudio("audio/tank_fire.wav").play()).start();
     }
 }

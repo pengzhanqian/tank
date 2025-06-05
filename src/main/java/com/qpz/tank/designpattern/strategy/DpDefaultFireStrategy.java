@@ -1,6 +1,9 @@
 package com.qpz.tank.designpattern.strategy;
 
-import com.qpz.tank.designpattern.*;
+import com.qpz.tank.designpattern.DpAudio;
+import com.qpz.tank.designpattern.DpGroup;
+import com.qpz.tank.designpattern.factory.AbstractTank;
+import com.qpz.tank.designpattern.factory.RectBullet;
 
 /**
  * 默认策略 单向开火
@@ -15,12 +18,12 @@ public class DpDefaultFireStrategy implements DpFireStrategy {
      * @param t 坦克
      */
     @Override
-    public void fire(DpTank t) {
-        int bx = t.x + DpTank.TANK_WIDTH / 2 - DpBullet.BULLET_WIDTH / 2;
-        int by = t.y + DpTank.TANK_HEIGHT / 2 - DpBullet.BULLET_HEIGHT / 2;
-        new DpBullet(bx, by, t.dir, t.group, t.tf);
+    public void fire(AbstractTank t) {
+        int bx = t.getX() + t.getWidth() / 2 - RectBullet.BULLET_WIDTH / 2;
+        int by = t.getY() + t.getHeight() / 2 - RectBullet.BULLET_HEIGHT / 2;
+        new RectBullet(bx, by, t.dir(), t.group(), t.dpTf());
         // 增加坦克开火音效
-        if (t.group == DpGroup.GOOD) new Thread(() -> new DpAudio("audio/tank_fire.wav").play()).start();
+        if (t.group() == DpGroup.GOOD) new Thread(() -> new DpAudio("audio/tank_fire.wav").play()).start();
 
     }
 }
