@@ -31,19 +31,6 @@ public class RectExplode extends AbstractExplode {
     }
 
     /**
-     * 初始化爆炸
-     *
-     * @param x    爆炸坐标X
-     * @param y    爆炸坐标Y
-     * @param dpTf 坦克游戏引用
-     * @return AbstractExplode 爆炸
-     */
-    @Override
-    public AbstractExplode createExplode(int x, int y, DpTankFrame dpTf) {
-        return new RectExplode(x, y, dpTf);
-    }
-
-    /**
      * 不断刷新爆炸
      *
      * @param g 画笔

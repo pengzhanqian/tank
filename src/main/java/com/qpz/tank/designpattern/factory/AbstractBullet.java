@@ -1,7 +1,5 @@
 package com.qpz.tank.designpattern.factory;
 
-import com.qpz.tank.designpattern.*;
-
 import java.awt.*;
 
 /**
@@ -11,18 +9,6 @@ import java.awt.*;
  * @since 2025/6/5 9:34
  **/
 public abstract class AbstractBullet {
-    /**
-     * 创建子弹
-     *
-     * @param x     子弹坐标X
-     * @param y     子弹坐标Y
-     * @param dir   子弹方向
-     * @param group 子弹群组
-     * @param tf    坦克游戏引用
-     * @return AbstractBullet
-     */
-    public abstract AbstractBullet createBullet(int x, int y, DpDir dir, DpGroup group, DpTankFrame tf);
-
     /**
      * 不断刷新子弹位置和方向
      *

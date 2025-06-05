@@ -45,21 +45,6 @@ public class RectBullet extends AbstractBullet {
     }
 
     /**
-     * 创建子弹
-     *
-     * @param x     子弹坐标X
-     * @param y     子弹坐标Y
-     * @param dir   子弹方向
-     * @param group 子弹群组
-     * @param tf    坦克游戏引用
-     * @return AbstractBullet
-     */
-    @Override
-    public AbstractBullet createBullet(int x, int y, DpDir dir, DpGroup group, DpTankFrame tf) {
-        return new RectBullet(x, y, dir, group, tf);
-    }
-
-    /**
      * 不断刷新子弹位置和方向
      *
      * @param g 画笔

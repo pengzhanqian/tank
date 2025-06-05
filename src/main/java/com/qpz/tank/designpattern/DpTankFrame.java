@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
+ * 使用CopyOnWriteArrayList等并发集合  防止多线程下1个线程遍历一个线程删除导致报错  java.util.ConcurrentModificationException
+ *
  * @author pengzhan.qian
  * @since 2025/5/29 16:36
  **/
@@ -15,17 +17,13 @@ public class DpTankFrame extends Frame {
 
     public static final int GAME_WIDTH = DpPropertyMgr.getIntProperty("gameWidth");
     public static final int GAME_HEIGHT = DpPropertyMgr.getIntProperty("gameHeight");
-    // 批量子弹 使用容器  使用CopyOnWriteArrayList等并发集合  防止多线程下1个线程遍历一个线程删除导致报错  java.util.ConcurrentModificationException
+    public RectFactory rf = new RectFactory();
+    public RectTank myTank;
     public List<AbstractBullet> bullets = new CopyOnWriteArrayList<>();
-    // 敌方坦克
     public List<AbstractTank> tanks = new CopyOnWriteArrayList<>();
-    // 初始化主战坦克
-    public RectTank myTank = new RectTank(RectTank.INIT_X, RectTank.INIT_Y, false, RectTank.INIT_DIR, DpGroup.GOOD, this);
-    // 批量爆炸
     public List<AbstractExplode> explodes = new CopyOnWriteArrayList<>();
     public Image offScreenImage = null;
     public boolean endFlag = true;
-
 
     public DpTankFrame() throws HeadlessException {
         this.setVisible(true);
@@ -42,6 +40,7 @@ public class DpTankFrame extends Frame {
             }
         });
         this.addKeyListener(new MyKeyListener());
+        this.myTank = (RectTank) rf.createTank(RectTank.INIT_X, RectTank.INIT_Y, false, RectTank.INIT_DIR, DpGroup.GOOD, this);
     }
 
     /**
@@ -65,7 +64,7 @@ public class DpTankFrame extends Frame {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("子弹的数量为" + bullets.size() + ", 主战坦克的坐标: (" + myTank.x + ", " + myTank.y + " ), 方向:" + myTank.dir.name(), 10, 60);
+        g.drawString("子弹的数量为" + bullets.size() + ", 主战坦克的坐标: (" + myTank.getX() + ", " + myTank.getY() + " ), 方向:" + myTank.dir().name(), 10, 60);
         g.drawString("敌方坦克数量: " + tanks.size(), 10, 80);
         g.drawString("爆炸的数量: " + tanks.size(), 10, 100);
         g.drawString("主战坦克的速度: " + myTank.speed, 10, 120);

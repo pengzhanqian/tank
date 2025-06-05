@@ -1,7 +1,5 @@
 package com.qpz.tank.designpattern.factory;
 
-import com.qpz.tank.designpattern.DpTankFrame;
-
 import java.awt.*;
 
 /**
@@ -12,15 +10,6 @@ import java.awt.*;
  **/
 public abstract class AbstractExplode {
 
-    /**
-     * 创建爆炸
-     *
-     * @param x    爆炸坐标X
-     * @param y    爆炸坐标Y
-     * @param dpTf 坦克游戏引用
-     * @return AbstractExplode 爆炸
-     */
-    public abstract AbstractExplode createExplode(int x, int y, DpTankFrame dpTf);
 
     /**
      * 不断刷新爆炸

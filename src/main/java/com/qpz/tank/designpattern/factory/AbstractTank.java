@@ -29,19 +29,6 @@ public abstract class AbstractTank {
     public abstract DpTankFrame dpTf();
 
     /**
-     * 创建坦克
-     *
-     * @param x      坦克坐标X
-     * @param y      坦克坐标Y
-     * @param moving 是否一开始就移动
-     * @param dir    坦克方向
-     * @param group  坦克群组
-     * @param tf     坦克游戏引用
-     * @return AbstractTank
-     */
-    public abstract AbstractTank createTank(int x, int y, boolean moving, DpDir dir, DpGroup group, DpTankFrame tf);
-
-    /**
      * 不断刷新坦克位置和方向
      *
      * @param g 画笔
