@@ -22,5 +22,10 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.114.Final</version>
+        </dependency>
     </dependencies>
 </project>
